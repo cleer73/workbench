@@ -21,6 +21,7 @@ module.exports = class LayoutView extends BaseView
   events:
     'resize:window': 'resize'
     'content-browser:app': 'renderBrowser'
+    'content-custom:app': 'renderBrowser'
 
   render: ->
     @$el.html @template()
@@ -37,6 +38,9 @@ module.exports = class LayoutView extends BaseView
       @$el.find('#app-content').html @templates.browser(url: url)
 
     @resize()
+
+  renderCustom: (view) =>
+    console.log arguments
 
   resize: (width, height) =>
     width ?= app.window.width
