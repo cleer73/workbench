@@ -1,0 +1,53 @@
+[
+  {
+    "type": "link",
+    "options": {
+      "title": "Moz Intranet",
+      "icon": "home",
+      "url": "https://intranet.moz.com"
+    }
+  },
+  {
+    "type": "link",
+    "options": {
+      "title": "Email",
+      "icon": "mail",
+      "url": "https://mail.google.com"
+    }
+  },
+  {
+    "type": "link",
+    "options": {
+      "title": "Calendar",
+      "icon": "calendar",
+      "url": "https://www.google.com/calendar"
+    }
+  },
+  {
+    "type": "linkGroup",
+    "options": {
+      "title": "Jira",
+      "icon": "ticket",
+      "links": [
+        {"title": "Sprint Board", "url": "https://seomoz.atlassian.net/secure/RapidBoard.jspa?rapidView=152&quickFilter=546"},
+        {"title": "Kanban Board", "url": "https://seomoz.atlassian.net/secure/RapidBoard.jspa?rapidView=79&quickFilter=629"}
+      ]
+    }
+  },
+  {
+    "type": "github",
+    "options": {
+      "repositories": [
+        {"title": "Moz.com", "name": "seomoz/seomoz"},
+        {"title": "Data Dashboard (Spitzer)", "name": "seomoz/spitzer"},
+        {"title": "Competitive Link Finder", "name": "seomoz/clf"},
+        {"title": "CRM & MDW", "repositories": [
+          {"title": "St. Arnold", "name": "seomoz/saintarnold"},
+          {"title": "Longboard", "name": "seomoz/longboard"},
+          {"title": "Utopias", "name": "seomoz/utopias"},
+          {"title": "MagicHat", "name": "seomoz/magichat"}
+        ]}
+      ]
+    }
+  }
+]

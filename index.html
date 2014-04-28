@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Workbench</title>
+    <link rel="stylesheet" href="./bower_components/semantic-ui/build/packaged/css/semantic.css">
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.js"></script>
+    <style>
+    body {
+      overflow: hidden;
+      margin: 0px;
+      padding: 0px;
+      font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    }
+
+    #app-sidebar {
+      background-color: #CCC;
+      width: 300px;
+      border-right: 1px solid #999;
+      padding: 15px;
+    }
+
+    #app-content {
+      position: absolute;
+      top: 0px;
+      left: 331px;
+    }
+
+    </style>
+    <script>
+      require('coffee-script/register');
+
+      global.$ = $;
+      global.app = {
+        config: require('./lib/config'),
+        document: document,
+        window: require('nw.gui').Window.get()
+      };
+
+      require('./lib/app');
+    </script>
+  </head>
+  <body></body>
+</html>
