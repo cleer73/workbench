@@ -10,18 +10,17 @@ module.exports = class BaseView
 
   constructor: (@selector, @options) ->
     @$el = ($ @selector)
+    @model = @options?.model ? @model
     @template = Handlebars.compile @template
     if @templates?
       for key, template of @templates
         # console.log key, template
         @templates[key] = Handlebars.compile template
 
-    # console.log @templates?, @templates
-
     @delegateEvents()
 
   render: ->
-    @$el.html @template()
+    @$el.html @template(@model)
 
   delegateEvents: ->
     for event, callback of @events
