@@ -17,11 +17,14 @@ module.exports = class LayoutView extends BaseView
         frameborder="0"
         ></iframe>
       """
+    custom: """
+      <div id="app-custom"></div>
+      """
 
   events:
     'resize:window': 'resize'
     'content-browser:app': 'renderBrowser'
-    'content-custom:app': 'renderBrowser'
+    'content-custom:app': 'renderCustom'
 
   render: ->
     @$el.html @template()
@@ -39,8 +42,15 @@ module.exports = class LayoutView extends BaseView
 
     @resize()
 
-  renderCustom: (view) =>
-    console.log arguments
+  renderCustom: (CustomView) =>
+    if @$el.find('#app-custom').length is 0
+      @$el.find('#app-content').html @templates.custom()
+      @customView = new CustomView '#app-custom'
+      @customView.render()
+    else
+      @customView.update()
+
+    @resize()
 
   resize: (width, height) =>
     width ?= app.window.width
@@ -52,7 +62,7 @@ module.exports = class LayoutView extends BaseView
       adjustedHeight = height - 22 # toolbar
     adjustedWidth = width - 331;
 
-    @$el.find '#app-browser'
+    @$el.find '#app-browser,#app-custom'
       .css 'height', adjustedHeight
       .css 'width', adjustedWidth
 
