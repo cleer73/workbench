@@ -1,4 +1,5 @@
 BaseView = require '../../view/base'
+SystemMetersCustomView = require './custom'
 
 module.exports = class SystemMetersModuleView extends BaseView
   template: """
@@ -18,4 +19,5 @@ module.exports = class SystemMetersModuleView extends BaseView
 
   click: (event) ->
     event.preventDefault()
+    app.events.emit 'content-custom', SystemMetersCustomView
     app.events.emit 'sidebar-selected', event.toElement
