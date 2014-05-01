@@ -18,3 +18,4 @@ module.exports = class SystemMetersModuleView extends BaseView
 
   click: (event) ->
     event.preventDefault()
+    app.events.emit 'sidebar-selected', event.toElement

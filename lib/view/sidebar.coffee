@@ -21,6 +21,9 @@ module.exports = class SidebarView extends BaseView
 
   modules: {}
 
+  events: 
+    'sidebar-selected:app': 'updateSelected'
+
   render: ->
     @$el.html @template(@model)
     @renderModules()
@@ -38,3 +41,11 @@ module.exports = class SidebarView extends BaseView
 
       currentModule.render()
       @modules[key] = currentModule
+
+  updateSelected: (el) ->
+    console.log 'SidebarView.updateSelected', arguments
+    ($ '#app-modules .item').removeClass 'active'
+    ($ el)
+      .addClass 'active'
+      .parents 'div.item'
+      .addClass 'active'
