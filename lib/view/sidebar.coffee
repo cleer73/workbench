@@ -25,7 +25,7 @@ module.exports = class SidebarView extends BaseView
     'sidebar-selected:app': 'updateSelected'
 
   render: ->
-    @$el.html @template(@model)
+    super
     @renderModules()
 
   renderModules: ->
