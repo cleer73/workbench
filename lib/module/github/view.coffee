@@ -30,6 +30,3 @@ module.exports = class GithubModuleView extends BaseView
     event.preventDefault()
     app.events.emit 'content-browser', sidebarElement: event.toElement
     app.events.emit 'sidebar-selected', sidebarElement: event.toElement
-
-  render: ->
-    @$el.html @template(@options)

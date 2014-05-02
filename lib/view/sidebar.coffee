@@ -21,7 +21,7 @@ module.exports = class SidebarView extends BaseView
   modules: {}
 
   render: ->
-    @$el.html @template(@model)
+    super
     @renderModules()
 
   renderModules: ->

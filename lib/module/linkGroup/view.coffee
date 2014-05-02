@@ -15,9 +15,7 @@ module.exports = class LinkGroupModuleView extends BaseView
     'click:a': 'click'
 
   click: (event) ->
+    console.log 'LinkGroupModuleView', event
     event.preventDefault()
     app.events.emit 'content-browser', sidebarElement: event.toElement
     app.events.emit 'sidebar-selected', sidebarElement: event.toElement
-
-  render: ->
-    @$el.html @template(@options)
