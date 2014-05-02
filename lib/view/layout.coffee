@@ -35,12 +35,38 @@ module.exports = class LayoutView extends BaseView
 
     @resize()
 
-  renderBrowser: (url) =>
-    if @$el.find('#app-browser').length
-      @$el.find('#app-browser').attr('src', url)
-    else
-      @$el.find('#app-content').html @templates.browser(url: url)
+  renderBrowser: (options) =>
+    uuid = ($ options.sidebarElement).data 'content-uuid'
+    clickedUrl = options.sidebarElement.href
 
+    @$el.find('#app-content>*').hide()
+
+    if @contentViews.hasOwnProperty uuid
+      unless clickedUrl is @contentViews[uuid].attr('src')
+        @contentViews[uuid].attr('src', clickedUrl)
+      @contentViews[uuid].show()
+    else
+      html = @templates.browser
+        uuid: uuid
+        src: clickedUrl
+      @$el.find('#app-content').append html
+      @contentViews[uuid] = @$el.find("#app-browser-#{uuid}")
+
+    @resize()
+
+  renderCustom: (options) =>
+    uuid = ($ options.sidebarElement).data('content-uuid')
+
+    @$el.find('#app-content>*').hide()
+
+    unless @contentViews.hasOwnProperty uuid
+      html = @templates.custom uuid: uuid
+      @$el.find('#app-content').append html
+      @contentViews[uuid] = new options.customView "\#app-custom-#{uuid}"
+      @contentViews[uuid].render()
+
+    @contentViews[uuid].$el.show()
+    @contentViews[uuid].update()
     @resize()
 
   resize: (width, height) =>
@@ -53,7 +79,7 @@ module.exports = class LayoutView extends BaseView
       adjustedHeight = height - 22 # toolbar
     adjustedWidth = width - 331;
 
-    @$el.find '#app-browser'
+    @$el.find '#app-content>iframe:visible,#app-content>div:visible'
       .css 'height', adjustedHeight
       .css 'width', adjustedWidth
 
