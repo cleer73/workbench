@@ -11,7 +11,7 @@ LayoutView = require './view/layout'
   # # DEMO, pull all PR's for a given repo.
   # entity = "ENTITY-NAME" # A username or organization name
   # project = "PROJECT-NAME" # The name of the project
-  # url = "https://api.github.com/repos/${entity}/#{project}/pulls"
+  # url = "https://api.github.com/repos/#{entity}/#{project}/pulls"
   # opt =
   #   headers:
   #     'User-Agent': 'request'

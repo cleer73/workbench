@@ -17,6 +17,7 @@
     "coffee-script": "^1.7.1",
     "request": "^2.34.0",
     "handlebars": "^2.0.0-alpha.2",
-    "nconf": "^0.6.9"
+    "nconf": "^0.6.9",
+    "node-uuid": "^1.4.1"
   }
 }
