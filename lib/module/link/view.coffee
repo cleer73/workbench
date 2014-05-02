@@ -12,9 +12,5 @@ module.exports = class LinkModuleView extends BaseView
 
   click: (event) ->
     event.preventDefault()
-    ($ '#app-modules .item').removeClass 'active'
-    ($ event.toElement).addClass 'active'
-    app.events.emit 'content-browser', event.toElement.href
-
-  render: ->
-    @$el.html @template(@options)
+    app.events.emit 'content-browser', sidebarElement: event.toElement
+    app.events.emit 'sidebar-selected', sidebarElement: event.toElement

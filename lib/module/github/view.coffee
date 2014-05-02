@@ -28,12 +28,8 @@ module.exports = class GithubModuleView extends BaseView
 
   click: (event) ->
     event.preventDefault()
-    ($ '#app-modules .item').removeClass 'active'
-    ($ event.toElement)
-      .addClass 'active'
-      .parents 'div.item'
-      .addClass 'active'
-    app.events.emit 'content-browser', event.toElement.href
+    app.events.emit 'content-browser', sidebarElement: event.toElement
+    app.events.emit 'sidebar-selected', sidebarElement: event.toElement
 
   render: ->
     @$el.html @template(@options)
