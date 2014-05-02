@@ -13,13 +13,12 @@ module.exports = class BaseView
   constructor: (@selector, @options) ->
     @$el = ($ @selector)
     @uuid = UUID.v4()
+    @model = @options?.model ? @model
     @template = Handlebars.compile @template
     if @templates?
       for key, template of @templates
         # console.log key, template
         @templates[key] = Handlebars.compile template
-
-    # console.log @templates?, @templates
 
     @delegateEvents()
 
