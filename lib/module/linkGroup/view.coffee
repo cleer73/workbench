@@ -14,6 +14,11 @@ module.exports = class LinkGroupModuleView extends BaseView
   events: 
     'click:a': 'click'
 
+  constructor: (selector, options) ->
+    for link, i in options.model.links
+      options.model.links[i].uuid = UUID.v4()
+    super
+
   click: (event) ->
     console.log 'LinkGroupModuleView', event
     event.preventDefault()
