@@ -20,6 +20,9 @@ module.exports = class SidebarView extends BaseView
 
   modules: {}
 
+  events:
+    'sidebar-selected:app': 'updateSelected'
+
   render: ->
     super
     @renderModules()
