@@ -9,18 +9,23 @@ module.exports = class LayoutView extends BaseView
 
   templates:
     browser: """
-      <iframe id="app-browser"
-        src="{{url}}"
+      <iframe id="app-browser-{{uuid}}"
+        src="{{src}}"
         nwdisable
         nwfaketop
         seamless
         frameborder="0"
         ></iframe>
       """
+    custom: """
+      <div id="app-custom-{{uuid}}"></div>
+      """
 
   events:
     'resize:window': 'resize'
     'content-browser:app': 'renderBrowser'
+
+  contentViews: {}
 
   render: ->
     @$el.html @template()

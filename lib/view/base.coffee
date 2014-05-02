@@ -1,4 +1,6 @@
 Events = require 'events'
+
+UUID = require 'node-uuid'
 Handlebars = require 'handlebars'
 
 module.exports = class BaseView
@@ -10,6 +12,7 @@ module.exports = class BaseView
 
   constructor: (@selector, @options) ->
     @$el = ($ @selector)
+    @uuid = UUID.v4()
     @template = Handlebars.compile @template
     if @templates?
       for key, template of @templates
@@ -21,7 +24,9 @@ module.exports = class BaseView
     @delegateEvents()
 
   render: ->
-    @$el.html @template()
+    @$el.html @template
+      uuid: @uuid
+      model: @model
 
   delegateEvents: ->
     for event, callback of @events

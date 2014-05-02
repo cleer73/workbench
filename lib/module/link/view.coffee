@@ -2,8 +2,8 @@ BaseView = require '../../view/base'
 
 module.exports = class LinkModuleView extends BaseView
   template: """
-    <a href="{{url}}" class="header item">
-      <i class="{{icon}} small icon"></i> {{title}}
+    <a href="{{model.url}}" class="header item" data-content-uuid="{{uuid}}">
+      <i class="{{model.icon}} small icon"></i> {{model.title}}
     </a>
     """
 
