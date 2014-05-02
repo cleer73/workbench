@@ -9,7 +9,7 @@ GithubModuleView = require '../module/github/view'
 module.exports = class SidebarView extends BaseView
   template: """
     <div id="app-modules" class="ui blue vertical fluid menu">
-      {{#each modules}}
+      {{#each model.modules}}
       <div id="{{type}}-{{@index}}"></div>
       {{/each}}
     </div>
@@ -29,10 +29,18 @@ module.exports = class SidebarView extends BaseView
       key = "#{item.type}-#{index}"
       selector = "\##{key}"
       currentModule = switch item.type
-        when "link" then new LinkModuleView selector, item.options
-        when "linkGroup" then new LinkGroupModuleView selector, item.options
-        when "github" then new GithubModuleView selector, item.options
-        else render: -> return
+        when "github" then new GithubModuleView selector, model: item.options
+        when "link" then new LinkModuleView selector, model: item.options
+        when "linkGroup" then new LinkGroupModuleView selector, model: item.options
+        else render: -> return # TODO: Review later, seems to work, but is untrusted.
 
       currentModule.render()
       @modules[key] = currentModule
+
+  updateSelected: (options) ->
+    ($ '#app-modules .item')
+      .removeClass('active')
+    ($ options.sidebarElement)
+      .addClass('active')
+      .parents('div.item')
+      .addClass('active')
