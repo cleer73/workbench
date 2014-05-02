@@ -1,13 +1,15 @@
+UUID = require 'node-uuid'
+
 BaseView = require '../../view/base'
 
 module.exports = class LinkGroupModuleView extends BaseView
   template: """
     <div class="header item">
-      <i class="{{icon}} small icon"></i> {{title}}
+      <i class="{{model.icon}} small icon"></i> {{model.title}}
     </div>
 
-    {{#each links}}
-      <a href="{{url}}" class="item">{{title}}</a>
+    {{#each model.links}}
+      <a href="{{url}}" data-content-uuid="{{uuid}}" class="item">{{title}}</a>
     {{/each}}
     """
 
