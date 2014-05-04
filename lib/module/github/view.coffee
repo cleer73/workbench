@@ -6,7 +6,7 @@ module.exports = class GithubModuleView extends BaseView
       <i class="github alternate small icon"></i> Github
     </a>
 
-    {{#each repositories}}
+    {{#each model.repositories}}
       {{#if name}}
         <a href="https://github.com/{{name}}/pulls" class="item">{{title}}</a>
       {{/if}}
