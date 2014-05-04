@@ -20,13 +20,34 @@ module.exports = class LayoutView extends BaseView
 
   templates:
     browser: """
-      <iframe id="app-browser-{{uuid}}"
-        src="{{src}}"
-        nwdisable
-        nwfaketop
-        seamless
-        frameborder="0"
-        ></iframe>
+      <div id="app-browser-{{uuid}}">
+        <div class="ui inverted  menu">
+          <a href="#app-browser-back"
+            class="item"
+            data-content-uuid="{{uuid}}"
+            ><i class="arrow left icon"></i></a>
+          <a href="#app-browser-forward"
+            class="item"
+            data-content-uuid="{{uuid}}"
+            ><i class="arrow right icon"></i></a>
+          <div class="item">
+            <i class="{{icon}} icon"></i> {{title}}
+          </div>
+          <div class="right menu">
+            <a href="#app-browser-refresh"
+              class="item"
+              data-content-uuid="{{uuid}}"
+              ><i class="refresh icon"></i></a>
+          </div>
+        </div>
+
+        <iframe src="{{src}}"
+          nwdisable
+          nwfaketop
+          seamless
+          frameborder="0"
+          ></iframe>
+      </div>
       """
     custom: """
       <div id="app-custom-{{uuid}}"></div>
@@ -57,7 +78,11 @@ module.exports = class LayoutView extends BaseView
         @contentViews[uuid].attr('src', clickedUrl)
       @contentViews[uuid].show()
     else
+      iconsClasses = 
+
       html = @templates.browser
+        title: ($ options.sidebarElement).data 'title'
+        icon: ($ options.sidebarElement).data 'icon'
         uuid: uuid
         src: clickedUrl
       @$el.find('#app-content').append html
@@ -90,7 +115,7 @@ module.exports = class LayoutView extends BaseView
       adjustedHeight = height - 22 # toolbar
     adjustedWidth = width - 331;
 
-    @$el.find '#app-content>iframe:visible,#app-content>div:visible'
+    @$el.find '#app-content iframe:visible,#app-content>div:visible'
       .css 'height', adjustedHeight
       .css 'width', adjustedWidth
 
