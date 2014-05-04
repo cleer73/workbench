@@ -9,7 +9,12 @@ module.exports = class LinkGroupModuleView extends BaseView
     </div>
 
     {{#each model.links}}
-      <a href="{{url}}" data-content-uuid="{{uuid}}" class="item">{{title}}</a>
+      <a href="{{url}}"
+        class="item"
+        data-content-uuid="{{uuid}}"
+        data-title="{{title}}"
+        data-icon="{{icon}}"
+        >{{title}}</a>
     {{/each}}
     """
 
@@ -19,6 +24,7 @@ module.exports = class LinkGroupModuleView extends BaseView
   constructor: (selector, options) ->
     for link, i in options.model.links
       options.model.links[i].uuid = UUID.v4()
+      options.model.links[i].icon = options.model.icon
     super
 
   click: (event) ->
