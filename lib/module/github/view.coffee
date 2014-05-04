@@ -1,3 +1,5 @@
+UUID = require 'node-uuid'
+
 BaseView = require '../../view/base'
 
 module.exports = class GithubModuleView extends BaseView
@@ -25,6 +27,14 @@ module.exports = class GithubModuleView extends BaseView
 
   events: 
     'click:a': 'click'
+
+  constructor: (selector, options) ->
+    for repo, i in options.model.repositories
+      options.model.repositories[i].uuid = UUID.v4()
+      if repo.repositories?
+        for childRepo, j in repo.repositories
+          options.model.repositories[i].repositories[j].uuid = UUID.v4()
+    super
 
   click: (event) ->
     event.preventDefault()
