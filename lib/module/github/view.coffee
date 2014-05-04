@@ -10,14 +10,24 @@ module.exports = class GithubModuleView extends BaseView
 
     {{#each model.repositories}}
       {{#if name}}
-        <a href="https://github.com/{{name}}/pulls" class="item">{{title}}</a>
+        <a href="https://github.com/{{name}}/pulls"
+          class="item"
+          data-content-uuid="{{uuid}}"
+          data-title="{{title}}"
+          data-icon="github alternate"
+          >{{title}}</a>
       {{/if}}
       {{#if repositories}}
         <div class="item">
           {{title}}
           <div class="menu">
             {{#each repositories}}
-              <a href="https://github.com/{{name}}/pulls" class="item">{{title}}</a>
+              <a href="https://github.com/{{name}}/pulls"
+                class="item"
+                data-content-uuid="{{uuid}}"
+                data-title="{{title}}"
+                data-icon="github alternate"
+                >{{title}}</a>
             {{/each}}
           </div>
         </div>
