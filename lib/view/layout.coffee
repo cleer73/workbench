@@ -8,17 +8,9 @@ module.exports = class LayoutView extends BaseView
       <div id="app-custom-welcome">
       <div class="ui grid">
         <div class="row">
-        <div class="four wide column">
-          Column 1
-        </div>
-        <div class="four wide column">
-          Column 2
-        </div>
-        <div class="four wide column">
-          Column 3
-        </div>
-        <div class="four wide column">
-          Column 4
+        <div class="sixteen wide column">
+          <h1>Welcome</h1>
+          <p>Someday this will be a fancy "this is how you use this app" screen, for when you first start it up.</p>
         </div>
         </div>
       </div>
