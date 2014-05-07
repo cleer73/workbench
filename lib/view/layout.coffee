@@ -1,5 +1,6 @@
 BaseView = require './base'
 SidebarView = require './sidebar'
+BrowserView = require './browser'
 
 module.exports = class LayoutView extends BaseView
   template: """
