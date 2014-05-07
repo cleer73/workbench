@@ -20,34 +20,7 @@ module.exports = class LayoutView extends BaseView
 
   templates:
     browser: """
-      <div id="app-browser-{{uuid}}">
-        <div class="ui inverted  menu">
-          <a href="#app-browser-back"
-            class="item"
-            data-content-uuid="{{uuid}}"
-            ><i class="arrow left icon"></i></a>
-          <a href="#app-browser-forward"
-            class="item"
-            data-content-uuid="{{uuid}}"
-            ><i class="arrow right icon"></i></a>
-          <div class="item">
-            <i class="{{icon}} icon"></i> {{title}}
-          </div>
-          <div class="right menu">
-            <a href="#app-browser-refresh"
-              class="item"
-              data-content-uuid="{{uuid}}"
-              ><i class="refresh icon"></i></a>
-          </div>
-        </div>
-
-        <iframe src="{{src}}"
-          nwdisable
-          nwfaketop
-          seamless
-          frameborder="0"
-          ></iframe>
-      </div>
+      <div id="app-browser-{{uuid}}"></div>
       """
     custom: """
       <div id="app-custom-{{uuid}}"></div>
@@ -71,23 +44,21 @@ module.exports = class LayoutView extends BaseView
     uuid = ($ options.sidebarElement).data 'content-uuid'
     clickedUrl = options.sidebarElement.href
 
-    @$el.find('#app-content>*').hide()
+    @$el.find('#app-content>:visible').hide()
 
     if @contentViews.hasOwnProperty uuid
-      unless clickedUrl is @contentViews[uuid].attr('src')
-        @contentViews[uuid].attr('src', clickedUrl)
       @contentViews[uuid].show()
     else
-      iconsClasses = 
-
-      html = @templates.browser
-        title: ($ options.sidebarElement).data 'title'
-        icon: ($ options.sidebarElement).data 'icon'
+      @$el.find('#app-content').append @templates.browser(uuid: uuid)
+      @contentViews[uuid] = new BrowserView "\#app-browser-#{uuid}",
         uuid: uuid
-        src: clickedUrl
-      @$el.find('#app-content').append html
-      @contentViews[uuid] = @$el.find("#app-browser-#{uuid}")
+        model:
+          title: ($ options.sidebarElement).data 'title'
+          icon: ($ options.sidebarElement).data 'icon'
+          src: clickedUrl
+      @contentViews[uuid].render()
 
+    @contentUUID = uuid
     @resize()
 
   renderCustom: (options) =>
@@ -115,8 +86,15 @@ module.exports = class LayoutView extends BaseView
       adjustedHeight = height - 22 # toolbar
     adjustedWidth = width - 331;
 
-    @$el.find '#app-content iframe:visible,#app-content>div:visible'
+    # Resize the primary content elements
+    @$el.find '#app-content>div:visible'
       .css 'height', adjustedHeight
       .css 'width', adjustedWidth
 
-    @sidebarView.$el.css 'height', (adjustedHeight - 30)
+    # Resize the sidebar content
+    @sidebarView.resize adjustedWidth, adjustedHeight
+
+    # Resize any module content
+    for uuid, view of @contentViews
+      if view.$el.is(':visible') and view.hasOwnProperty 'resize'
+        view.resize adjustedWidth, adjustedHeight
