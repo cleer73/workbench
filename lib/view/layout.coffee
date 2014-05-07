@@ -6,16 +6,19 @@ module.exports = class LayoutView extends BaseView
   template: """
     <div id="app-sidebar">Layout &gt; Sidebar</div>
     <div id="app-content">
-      <div id="app-custom-welcome">
-      <div class="ui grid">
-        <div class="row">
-        <div class="sixteen wide column">
-          <h1>Welcome</h1>
-          <p>Someday this will be a fancy "this is how you use this app" screen, for when you first start it up.</p>
-        </div>
+      <div id="app-custom-{{uuid}}">
+      <div style="padding: 0px 20px;">
+        <div class="ui grid">
+          <div class="row">
+          <div class="sixteen wide column">
+            <h1>Welcome</h1>
+            <p>Someday this will be a fancy "this is how you use this app" screen, for when you first start it up.</p>
+          </div>
+          </div>
         </div>
       </div>
       </div>
+    </div>
     </div>
     """
 
