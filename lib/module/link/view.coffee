@@ -16,6 +16,5 @@ module.exports = class LinkModuleView extends BaseView
 
   click: (event) ->
     event.preventDefault()
-    console.log 'LinkModuleView', event.toElement
     app.events.emit 'content-browser', sidebarElement: event.toElement
     app.events.emit 'sidebar-selected', sidebarElement: event.toElement
