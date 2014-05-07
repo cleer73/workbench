@@ -37,7 +37,7 @@ module.exports = class LayoutView extends BaseView
   contentViews: {}
 
   render: ->
-    @$el.html @template()
+    super
 
     @sidebarView = new SidebarView '#app-sidebar'
     @sidebarView.render()
