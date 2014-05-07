@@ -40,6 +40,18 @@ module.exports = class SidebarView extends BaseView
       currentModule.render()
       @modules[key] = currentModule
 
+  resize: (width, height) ->
+    @$el.css 'height', (height - 30)
+
+    contentsHeight = 0
+    @$el.find('>*').each (index, el) ->
+      contentsHeight += ($ el).height()
+
+    if contentsHeight > @$el.innerHeight()
+      @$el.css 'overflow', 'scroll'
+    else
+      @$el.css 'overflow', 'hidden'
+
   updateSelected: (options) ->
     ($ '#app-modules .item')
       .removeClass('active')
